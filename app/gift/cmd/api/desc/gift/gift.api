@@ -1,0 +1,58 @@
+syntax = "v1"
+
+info(
+	title: "礼物实例"
+	desc: "礼物实例"
+	author: "xiangxiang"
+	email: "373861465@qq.com"
+)
+
+type GiftInfo {
+	Id        int64  `json:"id"`
+	GiftName  string `json:"name"`
+	ImgUrl    string `json:"image_url"`
+	CreatedAt int64  `json:"created_at"`
+	Currency  int64  `json:"type"`
+	ChargeNum int64  `json:"price"`
+	GiftAttr  string `json:"gift_attr"`
+}
+
+type (
+	GiftListReq {
+		LastId   int64 `json:"last_id" validate:"omitempty,numeric"`
+		PageSize int64 `json:"page_size" validate:"required,omitempty,numeric,max=100,min=1"`
+	}
+
+	GiftListResp {
+		Iret  int64       `json:"iret"`
+		Smsg  string      `json:"smsg"`
+		Total int64       `json:"total"`
+		List  []*GiftInfo `json:"list"`
+	}
+)
+
+type (
+	GiftSendReq {
+		SendTo   string `json:"send_to" validate:"required,omitempty"`
+		GiftId   int64  `json:"gift_id" validate:"required,numeric"`
+		GiftNum  int64  `json:"gift_num" validate:"required,omitempty,numeric"`
+		RoomMark string `json:"room_mark" validate:"required,omitempty"`
+	}
+
+	GiftSendResp {
+		Iret int64  `json:"iret"`
+		Smsg string `json:"smsg"`
+	}
+)
+
+type (
+	GetItemReq {
+		GiftId int64 `json:"gift_id" validate:"omitempty,numeric"`
+	}
+
+	GetItemResp {
+		Iret int64  `json:"iret"`
+		Smsg string `json:"smsg"`
+		GiftInfo
+	}
+)

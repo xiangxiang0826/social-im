@@ -1,0 +1,340 @@
+syntax = "v1"
+
+info(
+	title: "用户实例"
+	desc: "用户实例"
+	author: "Dengh"
+	email: "793967139@qq.com"
+)
+
+type User {
+	Id       int64  `json:"id"`
+	Mobile   string `json:"mobile"`
+	NickName string `json:"nickname"`
+	Sex      int64  `json:"sex"`
+	Avatar   string `json:"avatar"`
+	Info     string `json:"info"`
+}
+
+type (
+	RegisterReq {
+		Mobile   	string `json:"mobile"`
+		Password 	string `json:"password"`
+		Verifycode 	string `json:"verifycode"`
+		RegType     int64  `jaon:"regtype"`
+	}
+	RegisterResp {
+		CommonResp
+		TokenResp
+		UserInfo	 User   `json:"userInfo"`
+	}
+)
+
+type (
+	LoginReq {
+		Mobile   string `json:"mobile"`
+		Password string `json:"password"`
+	}
+	LoginResp {
+		CommonResp
+		TokenResp
+		UserInfo	 User   `json:"userInfo"`
+	}
+)
+
+type (
+	UserInfoReq {
+		Uid   int64 `json:"uid"`
+	}
+	UserInfoResp {
+		CommonResp
+		UserInfo User `json:"userInfo"`
+	}
+)
+
+type (
+	IdentityReq {
+		Identity  string  `json:"identity"`
+		RealName  string  `json:"real_name"`
+		DeviceId  string  `json:"device_id"`
+	}
+	IdentityResp {
+		Res  string `json:"res"`
+	}
+)
+
+type (
+	CheckUserIdReq {
+		Mobile   string `json:"mobile"`
+	}
+	CheckUserIdResp {
+		CommonResp
+		UserId int64 `json:"userId"`
+		PwdStatus	int64 `json:"pwdStatus"`
+	}
+)
+
+type (
+	UpdateInfoReq {
+		Uid      int64  `json:"uid"`
+		Mobile	string `json:"mobile"`
+		Nickname string `json:"nickname"`
+		Sex      int64  `json:"sex"`
+		Avatar   string `json:"avatar"`
+		Birthday int64 `json:"birthday"`
+	}
+	UpdateInfoResp {
+		CommonResp
+		UserInfo User `json:"userInfo"`
+	}
+)
+
+type (
+	UpdatePwdReq {
+		Mobile	string `json:"mobile"`
+		Pwd		string `json:"pwd"`
+	}
+	UpdatePwdResp {
+		CommonResp
+	}
+)
+
+type (
+	GetRtcTokenReq {
+		Uid	string `json:"uid"`
+		ChannelName string `json:"channelName"`
+	}
+	GetRtcTokenResp {
+		CommonResp
+		RtcToken    string `json:"rtcToken"`
+	}
+)
+
+type (
+	GetRtmTokenReq {
+		Uid	string `json:"uid"`
+	}
+	GetRtmTokenResp {
+		CommonResp
+		RtmToken    string `json:"rtmToken"`
+	}
+)
+
+type (
+	GetAccessTokenReq {
+		Uid	string `json:"uid"`
+		Mobile	string `json:"mobile"`
+		Plat string	`json:"plat"`
+	}
+	GetAccessTokenResp {
+		CommonResp
+		AccessToken string `json:"accessToken"`
+	}
+)
+
+type MicStatus {
+	Code int `json:"code"`
+	Status string `json:"status"`
+}
+type (
+	applyMicReq {
+		Room int64 `json:"room"`
+		User int64 `json:"user"`
+	}
+	applyMicResp {
+		Status MicStatus `json:"status"`
+	}
+)
+
+type (
+	approveMicReq {
+		Room int64 `json:"room"`
+		Uid int64 `json:"uid"`
+		User int64 `json:"user"`
+	}
+	approveMicResp {
+		Status MicStatus `json:"status"`
+	}
+)
+
+type (
+	rejectMicReq {
+		Room int64 `json:"room"`
+		Uid int64 `json:"uid"`
+		User int64 `json:"user"`
+	}
+	rejectMicResp {
+		Status MicStatus `json:"status"`
+	}
+)
+
+
+type (
+	removeMicReq {
+		Room int64 `json:"room"`
+		Uid int64 `json:"uid"`
+		User int64 `json:"user"`
+	}
+	removeMicResp {
+		Status MicStatus `json:"status"`
+	}
+)
+
+type (
+	applyingMicListReq {
+		Room int64 `json:"room"`
+	}
+	applyingMicListResp {
+		Users []int64 `json:"users"`
+	}
+)
+
+type (
+	onMicListReq {
+		Room int64 `json:"room"`
+	}
+	onMicListResp {
+		Users []int64 `json:"users"`
+	}
+)
+
+type (
+	inviteMicReq {
+		Room int64 `json:"room"`
+		Uid int64 `json:"uid"`
+		User int64 `json:"user"`
+	}
+	inviteMicResp {
+		Status MicStatus `json:"status"`
+	}
+)
+
+type (
+	acceptMicReq {
+		Room int64 `json:"room"`
+		User int64 `json:"user"`
+	}
+	acceptMicResp {
+		Status MicStatus `json:"status"`
+	}
+)
+
+type (
+	declineMicReq {
+		Room int64 `json:"room"`
+		User int64 `json:"user"`
+	}
+	declineMicResp {
+		Status MicStatus `json:"status"`
+	}
+)
+
+
+
+type (
+	stopMicReq {
+		Room int64 `json:"room"`
+		Uid int64 `json:"uid"`
+		User int64 `json:"user"`
+	}
+	stopMicResp {
+		Status MicStatus `json:"status"`
+	}
+)
+
+type (
+	resumeMicReq {
+		Room int64 `json:"room"`
+		Uid int64 `json:"uid"`
+		User int64 `json:"user"`
+	}
+	resumeMicResp {
+		Status MicStatus `json:"status"`
+	}
+)
+
+
+type (
+	inviteAdminReq {
+		Room int64 `json:"room"`
+		Uid int64 `json:"uid"`
+		User int64 `json:"user"`
+	}
+	inviteAdminResp {
+		Status CommonResp `json:"status"`
+	}
+)
+
+type (
+	acceptAdminReq {
+		Room int64 `json:"room"`
+		User int64 `json:"user"`
+	}
+	acceptAdminResp {
+		Status CommonResp `json:"status"`
+	}
+)
+
+type (
+	declineAdminReq {
+		Room int64 `json:"room"`
+		User int64 `json:"user"`
+	}
+	declineAdminResp {
+		Status CommonResp `json:"status"`
+	}
+)
+
+type (
+	roomAdminListReq {
+		Room int64 `json:"room"`
+	}
+	roomAdminListResp {
+		Uids []int64 `json:"uids"`
+	}
+)
+
+
+type (
+	removeAdminReq {
+		Room int64 `json:"room"`
+		Uid int64 `json:"uid"`
+		User int64 `json:"user"`
+	}
+	removeAdminResp {
+		Status CommonResp `json:"status"`
+	}
+)
+
+
+type (
+	userFollowReq{
+		Room int64 `json:"room"`
+		Uid  int64 `json:"uid"`  //action 发起的一方uid
+		User int64 `json:"user"` //action 作用方的uid
+	}
+	userFollowResp{
+		CommonResp
+	}
+)
+
+type (
+	userunFollowReq{
+		Room int64 `json:"room"`
+		Uid  int64 `json:"uid"`  //action 发起的一方uid
+		User int64 `json:"user"` //action 作用方的uid
+	}
+	userunFollowResp{
+		CommonResp
+	}
+)
+
+type (
+	userFollowListReq{
+		Room int64 `json:"room"`
+		Uid  int64 `json:"uid"`
+	}
+	userFollowListResq{
+		Users []int64 `json:"users"`
+	}
+)

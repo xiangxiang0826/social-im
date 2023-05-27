@@ -1,0 +1,203 @@
+syntax = "v1"
+
+info(
+	title: "用户服务"
+	desc: "用户服务"
+	author: "Dengh"
+	email: "793967139@qq.com"
+	version: "v1"
+)
+
+type CommonResp {
+	Iret int64  `json:"iret"`
+	Smsg string `json:"smsg"`
+}
+
+type TokenResp {
+	AccessToken string `json:"accessToken"`
+	RtcToken    string `json:"rtcToken"`
+	RtmToken    string `json:"rtmToken"`
+}
+
+import (
+	"user/user.api"
+	"user/sms.api"
+	"user/base.api"
+)
+
+//============================> user v1 <============================
+//no need login
+@server(
+	prefix: user/v1
+	group: user
+)
+service user {
+	@doc "register"
+	@handler register
+	post /user/register (RegisterReq) returns (RegisterResp)
+	
+	@doc "login"
+	@handler login
+	post /user/login (LoginReq) returns (LoginResp)
+	
+	@doc "sms"
+	@handler sms
+	post /user/sms (SmsReq) returns (SmsResp)
+	
+	@doc "smsReg"
+	@handler smsReg
+	post /user/smsReg (SmsRegReq) returns (SmsRegResp)
+	
+	@doc "smsLogin"
+	@handler smsLogin
+	post /user/smsLogin (SmsLoginReq) returns (SmsLoginResp)
+	
+	@doc "autoReg"
+	@handler autoReg
+	post /user/autoReg (AutoRegReq) returns (AutoRegResp)
+	
+	@doc "checkUserId"
+	@handler checkUserId
+	post /user/checkUserId (CheckUserIdReq) returns (CheckUserIdResp)
+	
+	@doc "updatePwd"
+	@handler updatePwd
+	post /user/updatePwd (UpdatePwdReq) returns (UpdatePwdResp)
+	
+	@doc "smsVerify"
+	@handler smsVerify
+	post /user/smsVerify (SmsVerifyReq) returns (SmsVerifyResp)
+}
+
+//need login
+@server(
+	prefix: user/v1
+	group: user
+	jwt: JwtAuth
+)
+service user {
+	@doc "get user info"
+	@handler detail
+	post /user/detail (UserInfoReq) returns (UserInfoResp)
+	
+	@doc "user identity"
+	@handler identity
+	post /user/identity (IdentityReq) returns (IdentityResp)
+	
+	@doc "updateInfo"
+	@handler updateInfo
+	post /user/updateInfo (UpdateInfoReq) returns (UpdateInfoResp)
+	
+	@doc "getRtcToken"
+	@handler getRtcToken
+	post /user/getRtcToken (GetRtcTokenReq) returns (GetRtcTokenResp)
+	
+	@doc "getRtmToken"
+	@handler getRtmToken
+	post /user/getRtmToken (GetRtmTokenReq) returns (GetRtmTokenResp)
+	
+	@doc "getAccessToken"
+	@handler getAccessToken
+	post /user/getAccessToken (GetAccessTokenReq) returns (GetAccessTokenResp)
+	
+	@doc "applyMic"
+	@handler applyMic
+	post /user/applyMic (applyMicReq) returns (applyMicResp)
+	
+	@doc "approveMic"
+	@handler approveMic
+	post /user/approveMic (approveMicReq) returns (approveMicResp)
+	
+	@doc "rejectMic"         //房主/管理员拒绝上麦申请
+	@handler rejectMic
+	post /user/rejectMic (rejectMicReq) returns (rejectMicResp)
+	
+	@doc "applyingMicList"
+	@handler applyingMicList
+	post /user/applyingMicList (applyingMicListReq) returns (applyingMicListResp)
+	
+	@doc "onMicList"
+	@handler onMicList
+	post /user/onMicList (onMicListReq) returns (onMicListResp)
+	
+	@doc "inviteMic"
+	@handler inviteMic
+	post /user/inviteMic (inviteMicReq) returns (inviteMicResp)
+	
+	@doc "acceptMic"
+	@handler acceptMic
+	post /user/acceptMic (acceptMicReq) returns (acceptMicResp)
+	
+	@doc "declineMic"
+	@handler declineMic
+	post /user/declineMic (declineMicReq ) returns (declineMicResp)
+	
+	@doc "removeMic"
+	@handler removeMic
+	post /user/removeMic (removeMicReq) returns (removeMicResp)
+	
+	@doc "stopMic"
+	@handler stopMic
+	post /user/stopMic (stopMicReq) returns (stopMicResp)
+	
+	@doc "resumeMic"
+	@handler resumeMic
+	post /user/resumeMic (resumeMicReq) returns (resumeMicResp)
+	
+	@doc "inviteAdmin"
+	@handler inviteAdmin
+	post /user/inviteAdmin (inviteAdminReq) returns (inviteAdminResp)
+	
+	@doc "acceptAdmin"
+	@handler acceptAdmin
+	post /user/acceptAdmin (acceptAdminReq) returns (acceptAdminResp)
+	
+	@doc "declineAdmin"
+	@handler declineAdmin
+	post /user/declineAdmin (declineAdminReq ) returns (declineAdminResp)
+	
+	@doc "roomAdminList"
+	@handler roomAdminList
+	post /user/roomAdminList (roomAdminListReq) returns (roomAdminListResp)
+	
+	@doc "removeAdmin"
+	@handler removeAdmin
+	post /user/removeAdmin (removeAdminReq) returns (removeAdminResp)
+	
+	@doc "updateBaseInfo"
+	@handler updateBaseInfo
+	post /user/updateBaseInfo (UpdateBaseReq) returns (UpdateBaseResp)
+	
+	@doc "updateAboutMe"
+	@handler updateAboutMe
+	post /user/updateAboutMe (UpdateAboutMeReq) returns (UpdateAboutMeResp)
+	
+	@doc "UpdateBackgroundImage"
+	@handler updateBackgroundImage
+	post /user/updateBackgroundImage (UpdateBackgroundImageReq) returns (UpdateBackgroundImageResp)
+	
+	@doc "GetUserBaseInfo"
+	@handler getUserBaseInfo
+	post /user/getUserBaseInfo (GetUserBaseReq) returns (GetUserBaseResp)
+	
+	@doc "SelectTag"
+	@handler selectTag
+	post /user/selectTag (SelectTagReq) returns (SelectTagResp)
+	
+	@doc "userFollow"
+	@handler userFollow
+	post /user/follow (userFollowReq) returns (userFollowResp)
+	
+	@doc "userunFollow"
+	@handler userunFollow
+	post /user/unfollow (userFollowReq) returns (userFollowResp)
+	
+	@doc "userFollowers"
+	@handler userFollowers
+	post /user/followers (userFollowListReq) returns (userFollowListResq)  //用户的粉丝
+	
+	@doc "userFollows"
+	@handler userFollows
+	post /user/follows(userFollowListReq) returns (userFollowListResq)  //用户的关注
+	
+}

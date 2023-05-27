@@ -1,0 +1,89 @@
+Name: giftrpc.rpc
+ListenOn: 0.0.0.0:2007
+Mode: dev
+
+#jwtAuth
+JwtAuth:
+  AccessSecret: social-im
+  AccessExpire: 7200
+
+#Monitoring
+Prometheus:
+  Host: 0.0.0.0
+  Port: 4009
+  Path: /metrics
+
+#Link Tracking
+# Telemetry:
+#   Name: gift-rpc
+#   Endpoint: http://127.0.0.1:14268/api/traces
+#   Sampler: 1.0
+#   Batcher: jaeger
+
+Log:
+  ServiceName: gift-rpc
+  Level: error
+  LogLevel: sql
+  Mode: file
+
+TokenRateLimiter:
+  Seconds: 60
+  Quota: 111
+
+Mysql:
+  Path: 127.0.0.1
+  Port: "3306"
+  Dbname: gva_xiangxiang
+  Username: root
+  Password: 772bcad2b15c512a
+  MaxIdleConns: 10
+  MaxOpenConns: 100
+  LogMode: "dev"
+  LogZap: false
+  Config: charset=utf8mb4&parseTime=True&loc=Local&timeout=20s&readTimeout=20s&writeTimeout=20s
+
+RedisConf:
+  Host: 127.0.0.1:6379 # 单节点
+  Pass: "test"
+  Type: node
+  DB: 0
+
+Cache:
+  - Host: 127.0.0.1:6379 # 可以多节点集群
+    Pass: "test"
+
+# Admin rpc service
+AdminRpcConf:
+  Endpoints:
+    - 127.0.0.1:2006
+  NonBlock: true
+
+# Etcd:
+#   Hosts:
+#     - 127.0.0.1:2380
+#   Key: userrpc.rpc
+
+AliOssConf: #阿里云短信配置，在阿里云申请成功后修改以下四项，enable为true则必须修改，阿里云为默认短信验证方式
+  AccessKeyId: "LTAI5tSjv5e5JSm6sXUGv4ep"
+  AccessKeySecrect: "IhkHh1YKbyNnlp5oo2RfquoaL3Pcs3"
+  SignName: "霖灵科技"
+  VerifyTemplate: "SMS_226810164"
+  Enable: true
+
+AgoraConf: #声网配置
+  AppId: "0950f49685554dd48f2fc471716eeb61"
+  appCertificate: "d4c5cc15b62046a89dc3ec8e0ac6240b"
+  Server: "api.sd-rtn.com"
+  BackupServer: "api.agora.io"
+  PubChannel: "social-im"
+  ExpireRtm:
+
+UserRpcConf:
+  Endpoints:
+    - 127.0.0.1:2004
+  NonBlock: true
+
+KqGiftSendConf:
+  Brokers:
+    - kafka:9092
+  Topic: gift-send-topic

@@ -1,0 +1,39 @@
+syntax = "v1"
+
+info(
+	title: "管理后台服务"
+	desc: "管理后台服务"
+	author: "Dengh"
+	email: "793967139@qq.com"
+	version: "v1"
+)
+
+import (
+	"admin/background.api"
+	"admin/dictionary.api"
+	"admin/projectConfig.api"
+	"admin/area.api"
+)
+
+//============================> admin v1 <============================
+
+//need login
+@server(
+	prefix: admin/v1
+	group: admin
+	jwt: JwtAuth
+)
+service admin {
+	@doc "background image list"
+	@handler backgroundImageList
+	post /backgroundImage/list (BackgroundImgReq) returns (BackgroundImgResp)
+	@doc "dictionary list"
+	@handler dictionaryList
+	post /dictionary/list (DictionaryGetReq) returns (DictionaryGetResp)
+	@doc "project config"
+	@handler projectConfig
+	post /projectConfig/get (ProjectConfigDetailReq) returns (ProjectConfigDetailResp)
+	@doc "area list"
+	@handler areaList
+	post /area/list (AreaListReq) returns (AreaListResp)
+}

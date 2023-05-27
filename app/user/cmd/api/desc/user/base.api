@@ -1,0 +1,111 @@
+syntax = "v1"
+
+info(
+    title: "用户基本资料实例"
+    desc: "用户基本资料实例"
+    author: "Dengh"
+    email: "793967139@qq.com"
+)
+
+type UserBase {
+    Id int64 `json:"id"`
+    Uid int64 `json:"uid"`
+    BodyHeight string `json:"body_height"`
+    Constellation string `json:"constellation"`
+    Education string `json:"education"`
+    School string `json:"school"`
+    Career string `json:"career"`
+    Hobby string `json:"hobby"`
+    ProvinceId int64 `json:"province_id"`
+    CityId int64 `json:"city_id"`
+    DistrictId int64 `json:"district_id"`
+    WorkProvinceId int64 `json:"work_province_id"`
+    WorkCityId int64 `json:"work_city_id"`
+    WorkDistrictId int64 `json:"work_district_id"`
+    Address string `json:"address"`
+    WorkAddress string `json:"work_address"`
+}
+
+type (
+    UpdateBaseReq {
+        Uid int64 `json:"uid" validate:"required,numeric,min=1"`
+        BodyHeight string `json:"body_height"`
+        Constellation string `json:"constellation"`
+        Education string `json:"education"`
+        School string `json:"school"`
+        Career string `json:"career"`
+        Hobby string `json:"hobby"`
+        ProvinceId int64 `json:"province_id" validate:"omitempty,numeric"`
+        CityId int64 `json:"city_id" validate:"omitempty,numeric"`
+        DistrictId int64 `json:"district_id" validate:"omitempty,numeric"`
+        WorkProvinceId int64 `json:"work_province_id" validate:"omitempty,numeric"`
+        WorkCityId int64 `json:"work_city_id" validate:"omitempty,numeric"`
+        WorkDistrictId int64 `json:"work_district_id" validate:"omitempty,numeric"`
+        Address string `json:"address"`
+        WorkAddress string `json:"work_address"`
+    }
+
+    UpdateBaseResp {
+        Id int64 `json:"id"`
+        Uid int64 `json:"uid"`
+    }
+
+    UpdateAboutMeReq {
+        Uid int64 `json:"uid" validate:"required,numeric,min=1"`
+        AboutMe string `json:"about_me" validate:"omitempty,max=300,min=1"`
+    }
+
+    UpdateAboutMeResp {
+        Id int64 `json:"id"`
+        Uid int64 `json:"uid"`
+    }
+
+    UpdateBackgroundImageReq {
+        Uid int64 `json:"uid" validate:"required,numeric,min=1"`
+        BackgroundUrl string `json:"background_url" validate:"required,url"`
+        BackgroundSmallUrl string `json:"background_small_url" validate:"required,url"`
+    }
+
+    UpdateBackgroundImageResp {
+        Id int64 `json:"id"`
+        Uid int64 `json:"uid"`
+    }
+
+    GetUserBaseReq {
+        Uid int64 `json:"uid" validate:"required,numeric,min=1"`
+    }
+
+    GetUserBaseResp {
+        Id int64 `json:"id"`
+        Uid int64 `json:"uid"`
+        BodyHeight string `json:"body_height"`
+        Constellation string `json:"constellation"`
+        Education string `json:"education"`
+        School string `json:"school"`
+        Career string `json:"career"`
+        Hobby string `json:"hobby"`
+        ProvinceId int64 `json:"province_id"`
+        CityId int64 `json:"city_id"`
+        DistrictId int64 `json:"district_id"`
+        WorkProvinceId int64 `json:"work_province_id"`
+        WorkCityId int64 `json:"work_city_id"`
+        WorkDistrictId int64 `json:"work_district_id"`
+        Address string `json:"address"`
+        WorkAddress string `json:"work_address"`
+        AboutMe string `json:"about_me"`
+        BackgroundUrl string `json:"background_url"`
+        BackgroundSmallUrl string `json:"background_small_url"`
+        DisplayBaseFields []string `json:"display_base_fields"`
+        NotEmptyBaseFields []string `json:"not_empty_base_fields"`
+    }
+
+    SelectTagReq {
+        Uid int64 `json:"uid" validate:"required,numeric,min=1"`
+        DisplayFields string `json:"display_fields"`
+    }
+
+    SelectTagResp {
+        Id int64 `json:"id"`
+        Uid int64 `json:"uid"`
+    }
+)

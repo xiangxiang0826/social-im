@@ -1,0 +1,609 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+
+//model
+message User {
+  int64 id = 1;
+  string mobile = 2;
+  string nick_name = 3;
+  int64  sex = 4;
+  string avatar = 5;
+  string info = 6;
+}
+
+message Token {
+  string accessToken = 4;
+  string rtcToken = 5;
+  string rtmToken = 6;
+}
+
+message UserAuth {
+  int64  id = 1;
+  int64  userId = 2;
+  string authType = 3;
+  string authKey = 4;
+}
+
+
+//req 、resp
+message RegisterReq {
+  string mobile = 1;
+  string nickname = 2;
+  string password = 3;
+  string verifycode = 4;
+  int64  regtype = 5;
+}
+
+message RegisterResp {
+  int64 iret = 1;
+  string smsg = 2;
+  User   userInfo = 3;
+  string accessToken = 4;
+  string rtcToken = 5;
+  string rtmToken = 6;
+}
+
+message LoginReq {
+  string  mobile = 1;
+  string  password = 2;
+}
+message LoginResp {
+  int64 iret = 1;
+  string smsg = 2;
+  User   userInfo = 3;
+  string accessToken = 4;
+  string rtcToken = 5;
+  string rtmToken = 6;
+}
+
+message GetUserInfoReq {
+  int64  id = 1;
+}
+message GetUserInfoResp {
+  User userInfo = 1;
+  int64 iret = 2;
+  string smsg = 3;
+}
+
+message GetUserAuthByAuthKeyReq {
+  string  authKey = 1;
+  string  authType = 2;
+}
+message GetUserAuthByAuthKeyResp {
+  UserAuth userAuth = 1;
+  int64 iret = 2;
+  string smsg = 3;
+}
+
+message GetUserAuthByUserIdReq {
+  int64  userId = 1;
+  string  authType = 2;
+}
+message GetUserAuthyUserIdResp {
+  UserAuth userAuth = 1;
+  int64 iret = 2;
+  string smsg = 3;
+}
+
+message GenerateTokenReq {
+  int64 userId = 1;
+}
+message GenerateTokenResp {
+  string accessToken = 1;
+  int64  accessExpire = 2;
+  int64  refreshAfter = 3;
+  int64 iret = 4;
+  string smsg = 5;
+}
+
+message SmsReq {
+  string mobile = 1;
+  string type = 2;
+}
+message SmsResp {
+  string msg = 1;
+  int64 iret = 2;
+  string smsg = 3;
+  User   userInfo = 4;
+}
+
+message SmsCodeReq {
+  string mobile = 1;
+  string  code = 2;
+}
+message SmsCodeResp {
+  string msg = 1;
+  int64 iret = 2;
+  string smsg = 3;
+}
+
+message SmsRegReq {
+  string mobile = 1;
+  string nickname = 2;
+  string password = 3;
+  string code = 4;
+  int64  regtype = 5;
+}
+message SmsRegResp {
+  int64 iret = 1;
+  string smsg = 2;
+  User   userInfo = 3;
+  string accessToken = 4;
+  string rtcToken = 5;
+  string rtmToken = 6;
+}
+
+message IdentityReq {
+  int64  userId = 1;
+  string Identity = 2;
+  string  RealName = 3;
+  string  DeviceId = 4;
+}
+message IdentityResp {
+  string res = 1;
+}
+
+message SmsLoginReq {
+  string mobile = 1;
+  string code = 2;
+}
+message SmsLoginResp {
+  int64 iret = 1;
+  string smsg = 2;
+  User   userInfo = 3;
+  string accessToken = 4;
+  string rtcToken = 5;
+  string rtmToken = 6;
+}
+
+message AutoRegReq {
+  string  mobile = 1;
+}
+message AutoRegResp {
+  int64 iret = 1;
+  string smsg = 2;
+  User   userInfo = 3;
+  string accessToken = 4;
+  string rtcToken = 5;
+  string rtmToken = 6;
+}
+
+message CheckUserIdReq {
+  string  mobile = 1;
+}
+message CheckUserIdResp {
+  int64 iret = 1;
+  string smsg = 2;
+  int64 userId = 3;
+  int64 pwdStatus = 4;
+}
+
+message SmsVerifyReq {
+  string mobile = 1;
+  string  code = 2;
+  string  type = 3;
+}
+message SmsVerifyResp {
+  int64 iret = 1;
+  string smsg = 2;
+  string  type = 3;
+}
+
+message UpdatePwdReq {
+  string mobile = 1;
+  string  pwd = 2;
+}
+message UpdatePwdResp {
+  int64 iret = 1;
+  string smsg = 2;
+}
+
+message UpdateInfoReq {
+  string mobile = 1;
+  string nick_name = 2;
+  int64 sex = 3;
+  string avatar = 4;
+  string province = 5;
+  string city = 6;
+  string district = 7;
+  int64 birthday = 8;
+  int64 uid = 9;
+}
+message UpdateInfoResp {
+  int64 iret = 1;
+  string smsg = 2;
+  User   userInfo = 3;
+}
+
+message GetRtcTokenReq {
+  string  uid = 1;
+  string channelName = 2;
+}
+message GetRtcTokenResp {
+  int64 iret = 1;
+  string smsg = 2;
+  string rtcToken = 3;
+}
+
+message GetRtmTokenReq {
+  string  uid = 1;
+}
+message GetRtmTokenResp {
+  int64 iret = 1;
+  string smsg = 2;
+  string rtmToken = 3;
+}
+
+message GetAccessTokenReq {
+  string  uid = 1;
+  string  plat = 2;
+  string mobile = 3;
+}
+message GetAccessTokenResp {
+  int64 iret = 1;
+  string smsg = 2;
+  string accessToken = 3;
+}
+
+message SendRtmReq {
+  string from = 1;
+  string to = 2;
+  string message_type = 3;
+  string message_body = 4;
+}
+
+message SendRtmResp {
+  int64 iret = 1;
+  string smsg = 2;
+  string code = 4;
+  string request_id = 5;
+  string result = 6;
+}
+
+message SendRtmChannelReq {
+  string from = 1;
+  string channel_name = 2;
+  string message_type = 3;
+  string message_body = 4;
+}
+message SendRtmChannelResp {
+  int64 iret = 1;
+  string smsg = 2;
+  string code = 4;
+  string request_id = 5;
+  string result = 6;
+}
+
+message MicStatus {
+  int32  code = 1;
+  string status = 2;
+}
+
+message ApplyMicReq  {
+  int64  room = 1;
+  int64  user = 2;
+}
+
+message ApplyMicResq  {
+  MicStatus   Status = 1;
+}
+
+message  ApproveMicReq  {
+  int64  room = 1;
+  int64  uid = 2;
+  int64  user = 3;
+}
+
+message ApproveMicResp  {
+  MicStatus   Status = 1;
+}
+
+message  RejectMicReq  {
+  int64  room = 1;
+  int64  uid = 2;
+  int64  user = 3;
+}
+
+message RejectMicResp  {
+  MicStatus   Status = 1;
+}
+
+message  RemoveMicReq  {
+  int64  room = 1;
+  int64  uid = 2;
+  int64  user = 3;
+}
+
+message RemoveMicResp  {
+  MicStatus   Status = 1;
+}
+
+message ApplyingMicListReq {
+  int64 room = 1;
+}
+
+message ApplyingMicListResp {
+  repeated int64 users = 1;
+}
+
+message UserMicTime {
+  int64 user = 1;
+  int64  time = 2;
+}
+
+message OnMicersListReq {
+  int64 room = 1;
+}
+message OnMicersListResp {
+  repeated UserMicTime users = 1;
+}
+
+message  InviteMicReq  {
+  int64  room = 1;
+  int64  uid = 2;
+  int64  user = 3;
+}
+
+message InviteMicResp  {
+  MicStatus   Status = 1;
+}
+
+message  AcceptMicReq  {
+  int64  room = 1;
+  int64  user = 2;
+}
+
+message AcceptMicResq  {
+  MicStatus   Status = 1;
+}
+
+message  DeclineMicReq  {
+  int64  room = 1;
+  int64  user = 2;
+}
+
+message DeclineMicResq  {
+  MicStatus   Status = 1;
+}
+
+message  StopMicReq  {
+  int64  room = 1;
+  int64  uid = 2;
+  int64  user = 3;
+}
+
+message StopMicResp  {
+  MicStatus   Status = 1;
+}
+
+message  ResumeMicReq  {
+  int64  room = 1;
+  int64  uid = 2;
+  int64  user = 3;
+}
+
+message ResumeMicResq{
+  MicStatus   Status = 1;
+}
+
+message  InviteAdminReq  {
+  int64  room = 1;
+  int64  uid = 2;
+  int64  user = 3;
+}
+message CommonResp {
+  int32  code = 1;
+  string status = 2;
+}
+
+message CommonRespNew {
+  int64  iret = 1;
+  string smsg = 2;
+}
+message InviteAdminResq{
+  CommonResp   resp = 1;
+}
+
+message  AcceptAdminReq  {
+  int64  room = 1;
+  int64  uid = 2;
+  int64  user = 3;
+}
+
+message  AcceptAdminResq  {
+  CommonResp   resp = 1;
+}
+
+message  DeclineAdminReq  {
+  int64  room = 1;
+  int64  uid = 2;
+  int64  user = 3;
+}
+
+message  DeclineAdminResq  {
+  CommonResp   resp = 1;
+}
+
+
+message roomAdminListReq {
+  int64 room = 1;
+}
+
+message roomAdminListResp {
+  repeated int64 uids = 1;
+}
+
+message  RemoveAdminReq  {
+  int64  room = 1;
+  int64  uid = 2;
+  int64  user = 3;
+}
+
+message RemoveAdminResp  {
+  CommonResp   resp = 1;
+}
+
+message  RemoveUserRoomStatusReq  {
+  int64  room = 1;
+  int64  user = 2;
+}
+
+message  RemoveUserRoomStatusResq  {
+  CommonRespNew   resp = 1;
+}
+
+message UpdateBaseReq {
+  string Constellation = 1;
+  string BodyHeight = 2;
+  string Education = 3;
+  string School = 4;
+  string Career = 5;
+  string Hobby = 6;
+  string Address = 7;
+  string WorkAddress = 8;
+  int64 ProvinceId = 9;
+  int64 CityId = 10;
+  int64 DistrictId = 11;
+  int64 WorkCityId = 12;
+  int64 WorkProvinceId = 13;
+  int64 WorkDistrictId = 14;
+  int64 Uid = 15;
+}
+
+message UpdateBaseResp {
+  int64 Id = 1;
+  int64 Uid = 2;
+}
+
+message UpdateAboutMeReq {
+  int64 Uid = 1;
+  string AboutMe = 2;
+}
+
+message UpdateAboutMeResp {
+  int64 Id = 1;
+  int64 Uid = 2;
+}
+
+message UpdateBackgroundImageReq {
+  int64 Uid = 1;
+  string BackgroundUrl = 2;
+  string BackgroundSmallUrl = 3;
+}
+
+message UpdateBackgroundImageResp {
+  int64 Id = 1;
+  int64 Uid = 2;
+}
+
+message GetUserBaseReq {
+  int64 Uid = 1;
+}
+
+message GetUserBaseResp {
+  string Constellation = 1;
+  string BodyHeight = 2;
+  string Education = 3;
+  string School = 4;
+  string Career = 5;
+  string Hobby = 6;
+  string Address = 7;
+  string WorkAddress = 8;
+  int64 ProvinceId = 9;
+  int64 CityId = 10;
+  int64 DistrictId = 11;
+  int64 WorkCityId = 12;
+  int64 WorkProvinceId = 13;
+  int64 WorkDistrictId = 14;
+  int64 Uid = 15;
+  string AboutMe = 16;
+  string BackgroundUrl = 17;
+  string BackgroundSmallUrl = 18;
+  repeated string DisplayBaseFields = 19;
+  int64 Id = 20;
+  repeated string NotEmptyBaseFields = 21;
+}
+
+message SelectTagReq {
+  int64 Uid = 1;
+  string DisplayFields = 2;
+}
+
+message SelectTagResp {
+  int64 Id = 1;
+  int64 Uid = 2;
+}
+message  RoomUsers {
+  int64  room = 1;
+  int64  uid = 2;   //动作行为的一方uid
+  int64  user = 3;   //动作行为的另一方uid ，比如： follow : uid follow user; unfollow: uid unfollower user
+}
+
+message  RoomUser {
+  int64  room = 1;
+  int64  user = 2;   //动作行为的一方uid
+}
+message Users {
+  repeated int64 users = 1;
+}
+//service
+service userRpc {
+  rpc login(LoginReq) returns(LoginResp);
+  rpc register(RegisterReq) returns(RegisterResp);
+  rpc getUserInfo(GetUserInfoReq) returns(GetUserInfoResp);
+  rpc generateToken(GenerateTokenReq) returns(GenerateTokenResp);
+  rpc sms(SmsReq) returns(SmsResp);
+  rpc SmsCode(SmsCodeReq) returns(SmsCodeResp);
+  rpc smsReg(SmsRegReq) returns(SmsRegResp);
+  rpc identity(IdentityReq) returns(IdentityResp);
+  rpc smsLogin(SmsLoginReq) returns(SmsLoginResp);
+  rpc autoReg(AutoRegReq) returns(AutoRegResp);
+  rpc checkUserId(CheckUserIdReq) returns(CheckUserIdResp);
+  rpc smsVerify(SmsVerifyReq) returns(SmsVerifyResp);
+  rpc updatePwd(UpdatePwdReq) returns(UpdatePwdResp);
+  rpc updateInfo(UpdateInfoReq) returns(UpdateInfoResp);
+  rpc getRtmToken(GetRtmTokenReq) returns(GetRtmTokenResp);
+  rpc getRtcToken(GetRtcTokenReq) returns(GetRtcTokenResp);
+  rpc getAccessToken(GetAccessTokenReq) returns(GetAccessTokenResp);
+  rpc SendRtm(SendRtmReq) returns(SendRtmResp);
+  rpc SendRtmChannel(SendRtmChannelReq) returns(SendRtmChannelResp);
+
+  rpc applyMic(ApplyMicReq) returns(ApplyMicResq);
+  rpc  approveMic(ApproveMicReq) returns(ApproveMicResp);
+  rpc  rejectMic(RejectMicReq)  returns(RejectMicResp);
+  rpc applyingMicList(ApplyingMicListReq)  returns(ApplyingMicListResp);
+  rpc OnMicersList(OnMicersListReq)  returns(OnMicersListResp);
+
+  rpc  inviteMic(InviteMicReq)  returns(InviteMicResp);
+  rpc  AcceptMic(AcceptMicReq)  returns(AcceptMicResq);
+  rpc  declineMic(DeclineMicReq)  returns(DeclineMicResq);
+
+  rpc  removeMic(RemoveMicReq) returns(RemoveMicResp);
+  rpc  stopMic(StopMicReq) returns(StopMicResp);
+  rpc  resumeMic(ResumeMicReq) returns(ResumeMicResq);
+
+  rpc  inviteAdmin(InviteAdminReq) returns(InviteAdminResq);
+  rpc acceptAdmin(AcceptAdminReq) returns(AcceptAdminResq);
+  rpc  declineAdmin(DeclineAdminReq) returns(DeclineAdminResq);
+  rpc  removeAdmin(RemoveAdminReq) returns(RemoveAdminResp);
+  rpc  roomAdminList(roomAdminListReq) returns(roomAdminListResp);
+
+  rpc removeUserRoomStatus(RemoveUserRoomStatusReq) returns(RemoveUserRoomStatusResq);
+  rpc updateBaseInfo(UpdateBaseReq) returns(UpdateBaseResp);
+  rpc updateAboutMe(UpdateAboutMeReq) returns(UpdateAboutMeResp);
+  rpc updateBackgroundImage(UpdateBackgroundImageReq) returns(UpdateBackgroundImageResp);
+  rpc getUserBaseInfo(GetUserBaseReq) returns(GetUserBaseResp);
+  rpc selectTag(SelectTagReq) returns(SelectTagResp);
+
+  rpc  userFollow(RoomUsers) returns(CommonRespNew);
+  rpc  userUnFollow(RoomUsers) returns(CommonRespNew);
+  rpc  userFollowers(RoomUser) returns(Users);    //用户的粉丝
+  rpc  userFollows(RoomUser) returns(Users);      //用户的关注
+
+
+
+}

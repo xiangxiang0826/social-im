@@ -1,0 +1,31 @@
+syntax = "v1"
+
+info(
+    title: "背景图实例"
+    desc: "背景图实例"
+    author: "邓晖"
+    email: "793967139@qq.com"
+)
+
+type (
+    BackgroundImgInfo {
+        Url string `json:"url"`                   //背景图地址
+        SmallUrl string `json:"small_url"`        //背景小图地址
+        Name string `json:"name"`                 //名称
+        Key string `json:"key"`
+        Tag string `json:"tag"`
+        Id int64 `json:"id"`
+        Type int64 `json:"type"`
+    }
+
+    BackgroundImgReq {
+        LastId int64 `json:"last_id" validate:"omitempty,numeric"`
+        PageSize int64 `json:"page_size" validate:"omitempty,numeric,max=100,min=0"`
+        Type int64 `json:"type" validate:"required,numeric,min=1"`
+    }
+
+    BackgroundImgResp {
+        Total int64 `json:"total"`
+        List []BackgroundImgInfo `json:"list"`
+    }
+)

@@ -1,0 +1,61 @@
+syntax = "v1"
+
+info(
+	title: "短信实例"
+	desc: "短信实例"
+	author: "向翔"
+	email: "793967139@qq.com"
+)
+
+type (
+	SmsReq {
+		Mobile   string `json:"mobile"`
+		Type	 string `json:"type"`
+	}
+	SmsResp {
+		CommonResp
+		Msg	string `json:"msg"`
+	}
+
+	SmsRegReq {
+		Mobile	string `json:"mobile"`
+		Code	string	`json:"code"`
+	}
+	SmsRegResp {
+		CommonResp
+		TokenResp
+		UserInfo	 User   `json:"userInfo"`
+		Msg string `json:"msg"`
+	}
+
+	SmsLoginReq {
+		Mobile	string `json:"mobile"`
+		Code	string	`json:"code"`
+	}
+	SmsLoginResp {
+		CommonResp
+		TokenResp
+		UserInfo	 User   `json:"userInfo"`
+	}
+
+	AutoRegReq {
+		Mobile   string `json:"mobile"`
+	}
+	AutoRegResp {
+		CommonResp
+		TokenResp
+		UserInfo	 User   `json:"userInfo"`
+		Msg	string `json:"msg"`
+	}
+
+	SmsVerifyReq {
+		Mobile   string `json:"mobile"`
+		Code	 string `json:"code"`
+		Type	 string `json:"type"`
+	}
+	SmsVerifyResp {
+		CommonResp
+		Type	string `json:"type"`
+		Msg	string `json:"msg"`
+	}
+)

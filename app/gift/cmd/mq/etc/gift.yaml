@@ -1,0 +1,48 @@
+Name: gift-mq
+Host: 0.0.0.0
+Port: 2008
+Mode: dev
+
+#监控
+Prometheus:
+  Host: 0.0.0.0
+  Port: 4003
+  Path: /metrics
+
+#链路追踪
+Telemetry:
+  Name: gift-mq
+  Endpoint: http://jaeger:14268/api/traces
+  Sampler: 1.0
+  Batcher: jaeger
+
+Log:
+  ServiceName: gift-mq
+  Level: error
+
+Redis:
+  Host: redis:6379
+  Type: node
+  Pass: test
+
+#kq
+KqGiftSendConf:
+  Name: KqGiftSend
+  Brokers:
+    - kafka:9092
+  Group: gift-send-group
+  Topic: gift-send-topic
+  Offset: first
+  Consumers: 1
+  Processors: 1
+
+#rpc
+giftRpcConf:
+  Endpoints:
+    - 127.0.0.1:2007
+  NonBlock: true
+
+UserRpcConf:
+  Endpoints:
+    - 127.0.0.1:2004
+  NonBlock: true

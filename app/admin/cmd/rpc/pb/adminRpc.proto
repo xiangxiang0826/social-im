@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+message BackImgConf{
+  string url = 1;
+  string SmallUrl = 2;
+  string name = 3;
+  string key = 4;
+  string tag = 5;
+  int64  id = 6;
+  int64  type = 7;
+}
+
+message DictionaryDetailConf{
+  string label = 1;
+  int64 value = 2;
+  int64 DictionaryId = 3;
+}
+
+message BackgroundImgReq {
+  int64 lastId = 1;
+  int64 pageSize = 2;
+  int64 type = 3;
+}
+
+message BackgroundImgResp {
+  int64 total = 1;
+  repeated BackImgConf list = 2;
+}
+
+message DictionaryGetReq {
+  string dictionaryType = 1;
+}
+
+message DictionaryGetResp {
+  repeated DictionaryDetailConf list = 1;
+}
+
+message ProjectConfigInfo {
+  int64 Id = 1;
+  int64 ConfigType = 2;
+  string ConfigName = 3;
+  string ConfigKey = 4;
+  string ConfigValue = 5;
+}
+
+message ProjectConfigDetailReq {
+  int64 ConfigType = 1;
+  string ConfigKey = 2;
+}
+
+message ProjectConfigDetailResp {
+   ProjectConfigInfo projectConfigInfo = 1;
+}
+
+message GiftInfo {
+  int64 id = 1;
+  string giftName = 2;
+  string imgUrl = 3;
+  int64 createdAt = 4;
+  int64 currency = 5;
+  int64 chargeNum = 6;
+  string giftAttr = 7;
+}
+
+message GiftListReq {
+  int64 lastId = 1;
+  int64 pageSize = 2;
+} 
+
+message GiftListResp {
+  int64 iret = 1;
+  string smsg = 2;
+  int64 total = 3;
+  repeated GiftInfo list = 4;
+}
+
+message GiftItemReq {
+  int64 GiftId = 1;
+}
+message GiftItemResp {
+  int64 Iret = 1;
+  string Smsg = 2;
+  int64 Id = 3;
+  string GiftName = 4;
+  string ImgUrl = 5;  
+  int64 CreatedAt = 6;
+  int64 Currency = 7;
+  int64 ChargeNum = 8;
+  string GiftAttr = 9;
+}
+
+message AreaInfo {
+  int64 Id = 1;
+  int64 Level = 2;
+  string Name = 3;
+  string Shortname = 4;
+  int64 Pid = 5;
+  string Longitude = 6;
+  string Latitude = 7;
+}
+
+message AreaListReq {
+  int64 lastId = 1;
+  int64 pageSize = 2;
+  int64 Level = 3;
+  int64 Pid = 4;
+}
+
+message AreaListResp {
+  int64 total = 1;
+  repeated AreaInfo list = 2;
+}
+
+
+//service
+service adminRpc {
+  rpc backgroundImageList(BackgroundImgReq) returns(BackgroundImgResp);
+  rpc dictionaryList(DictionaryGetReq) returns(DictionaryGetResp);
+  rpc projectConfigDetail(ProjectConfigDetailReq) returns(ProjectConfigDetailResp);
+  rpc giftList(GiftListReq) returns(GiftListResp);
+  rpc giftItem(GiftItemReq) returns(GiftItemResp);
+  rpc areaList(AreaListReq) returns(AreaListResp);
+}

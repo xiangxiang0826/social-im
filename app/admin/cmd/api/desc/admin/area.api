@@ -1,0 +1,32 @@
+syntax = "v1"
+
+info(
+    title: "基础区域实例"
+    desc: "基础区域实例"
+    author: "邓晖"
+    email: "793967139@qq.com"
+)
+
+type (
+    AreaInfo {
+        Longitude string `json:"longitude"`
+        Latitude string `json:"latitude"`
+        Pid int64 `json:"pid"`
+        Name string `json:"name"`
+        Shortname string `json:"shortname"`
+        Id int64 `json:"id"`
+        Level int64 `json:"level"`
+    }
+
+    AreaListReq {
+        LastId int64 `json:"last_id" validate:"omitempty,numeric"`
+        PageSize int64 `json:"page_size" validate:"omitempty,numeric,max=100,min=0"`
+        Level int64 `json:"level" validate:"required,numeric,min=1"`
+        Pid int64 `json:"pid" validate:"omitempty,numeric,min=0"`
+    }
+
+    AreaListResp {
+        Total int64 `json:"total"`
+        List []AreaInfo `json:"list"`
+    }
+)

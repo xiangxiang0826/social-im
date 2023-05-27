@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+message GiftSendReq {
+  int64  uid = 1;
+  int64 giftId = 2;
+  int64 gift_num = 3;
+  string send_to = 4;
+  string room_mark = 5;
+}
+
+message GiftSendResp {
+  int64 Iret = 1;
+  string smsg = 2;
+}
+
+message GetItemReq {
+  int64 GiftId = 1;
+}
+message GetItemResp {
+  int64 Iret = 1;
+  string Smsg = 2;
+  int64 Id = 3;
+  string GiftName = 4;
+  string ImgUrl = 5;
+  int64 CreatedAt = 6;
+  int64 Currency = 7;
+  int64 ChargeNum = 8;
+}
+
+message GiftUpdateBagReq {
+  int64  uid = 1;
+  int64 giftId = 2;
+  int64 gift_num = 3;
+  int64 send_to = 4;
+}
+
+message GiftUpdateBagResp {
+  int64 Iret = 1;
+  string smsg = 2;
+}
+
+message GiftUpdateAttrReq {
+  int64  uid = 1;
+  int64 giftId = 2;
+  int64 gift_num = 3;
+  int64 send_to = 4;
+}
+
+message GiftUpdateAttrResp {
+  int64 Iret = 1;
+  string smsg = 2;
+}
+
+
+//service
+service giftRpc {
+  rpc send(GiftSendReq) returns(GiftSendResp);  
+  rpc updateBag(GiftUpdateBagReq) returns(GiftUpdateBagResp);
+  rpc updateAttr(GiftUpdateAttrReq) returns(GiftUpdateAttrResp);
+}

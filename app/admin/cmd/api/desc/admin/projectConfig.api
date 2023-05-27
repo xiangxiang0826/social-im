@@ -1,0 +1,24 @@
+syntax = "v1"
+
+info(
+    title: "项目配置实例"
+    desc: "项目配置实例"
+    author: "邓晖"
+    email: "793967139@qq.com"
+)
+
+type (
+
+    ProjectConfigDetailReq {
+        ConfigType int64 `json:"config_type" validate:"required,min=1"`
+        ConfigKey string `json:"config_key" validate:"required,min=1"`
+    }
+
+    ProjectConfigDetailResp {
+        Id int64 `json:"id"`
+        ConfigName string `json:"config_name"`
+        ConfigKey string `json:"config_key"`
+        ConfigValue string `json:"config_value"`
+        ConfigType int64 `json:"config_type"`
+    }
+)

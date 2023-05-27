@@ -1,0 +1,35 @@
+syntax = "v1"
+
+info(
+	title: "礼物服务"
+	desc: "礼物服务"
+	author: "xiangxiang"
+	email: "373861465@qq.com"
+	version: "v1"
+)
+
+import (
+	"gift/gift.api"
+)
+
+//============================> gift v1 <============================
+
+//need login
+@server(
+	prefix: gift/v1
+	group: gift
+	jwt: JwtAuth
+)
+service gift {
+	@doc "create"
+	@handler list
+	post /gift/list (GiftListReq) returns (GiftListResp)
+	
+	@doc "send"
+	@handler send
+	post /gift/send (GiftSendReq) returns (GiftSendResp)
+	
+	@doc "getItem"
+	@handler getItem
+	post /gift/getItem (GetItemReq) returns (GetItemResp)
+}

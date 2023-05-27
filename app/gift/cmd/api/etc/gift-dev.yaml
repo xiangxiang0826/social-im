@@ -1,0 +1,38 @@
+Name: gift
+Host: 0.0.0.0
+Port: 9521
+Mode: dev
+File: /home/im_server/app/user/cmd/api/user.log
+
+#jwtAuth
+JwtAuth:
+  AccessSecret: social-im
+  AccessExpire: 7200
+#监控
+Prometheus:
+  Host: 0.0.0.0
+  Port: 4008
+  Path: /metrics
+
+#链路追踪
+# Telemetry:
+#   Name: user-api
+#   Endpoint: http://127.0.0.1:14268/api/traces
+#   Sampler: 1.0
+#   Batcher: jaeger
+
+Log:
+  ServiceName: user-api
+  Level: error
+  Mode: file
+
+#rpc service
+GiftRpcConf:
+  Endpoints:
+    - 127.0.0.1:2007
+  NonBlock: true
+
+AdminRpcConf:
+  Endpoints:
+    - 127.0.0.1:2006
+  NonBlock: true
