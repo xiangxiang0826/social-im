@@ -1,0 +1,258 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+message PartyCreateReq {
+  int64  uid = 1;
+  string name = 2;
+  string backgroundUrl = 3;
+  string backgroundSmallUrl = 4;
+  int64  partyType = 5;
+}
+
+message PartyCreateResp {
+  int64 id = 1;
+  string mark = 2;
+  int64 dayRemaiNum = 3;
+  string backgroundUrl = 4;
+  string backgroundSmallUrl = 5;
+  string name = 6;
+  int64 partyType = 7;
+  int64 createdAt = 8;
+  string rtcToken = 9;
+}
+
+message RoomLimitReq {
+  int64 uid = 1;
+  int64 dayNum = 2;
+  int64 type = 3;
+}
+
+message RoomLimitResp {
+  int64 dayRemaiNum = 1;
+}
+
+message PartyJoinReq {
+  int64 room_id = 1;
+  int64 uid = 2;
+}
+message PartyJoinResp {
+  int64 iret = 1;
+  string smsg = 2;
+  string name = 3;
+  string backgroundUrl = 4;
+  int64 partyType = 5;
+  int64 create_user = 6;
+  int64 create_at = 7;
+  int64 room_id = 8;
+  string mark = 9;
+  string rtcToken = 10;
+}
+
+message PartyLeaveReq {
+  int64 room_id = 1;
+  int64 uid = 2;
+}
+message PartyLeaveResp {
+  int64 iret = 1;
+  string smsg = 2;
+  string name = 3;
+  string mark = 4;
+}
+
+message PartyRemoveReq {
+  int64 room_id = 1;
+  int64 uid = 2;
+}
+message PartyRemoveResp {
+  int64 iret = 1;
+  string smsg = 2;
+  string name = 3;
+  string mark = 4;
+}
+
+message PartyListReq{
+  int64 lastId = 1;
+  int64 pageSize = 2;
+  int64 onlineNums = 3;
+}
+
+message UserInfo{
+  string avatar = 1;
+}
+
+message PartyInfo{
+  int64 id = 1;
+  string name = 2;
+  string mark = 3;
+  string backgroundSmallUrl = 4;
+  int64 partyType = 5;
+  int64 createdAt = 6;
+  int64 onlineNums = 7;
+  int64 isHot = 8;
+  repeated UserInfo userList = 9;
+}
+
+message PartyListResp{
+  int64 total = 1;
+  repeated PartyInfo list = 2;
+}
+
+message UserNumReportReq {
+  string mark = 1;
+  int64 onlineNums = 2;
+}
+
+message UserNumReportResp {
+  string mark = 1;
+}
+
+message roominfoReq {
+  int64  room = 1;
+}
+
+message roominfoResq {
+  int64 id = 1;
+  string mark = 2;
+  string name = 3;
+  string backgroundUrl = 4;
+  string backgroundSmallUrl = 5;
+  int64 partyType = 6;
+  int64 createUser = 7;
+  int64 onlineNums = 8;
+  int64 createdAt = 9;
+  int64 updatedAt = 10;
+}
+
+message PartyNameUpdateReq {
+  int64 uid = 1;
+  string mark = 2;
+  string name = 3;
+}
+
+message PartyNameUpdateResp {
+  int64 id = 1;
+  string mark = 2;
+  string name = 3;
+}
+
+message PartyBackGroundImgUpdateReq {
+  int64 uid = 1;
+  string mark = 2;
+  string backgroundUrl = 3;
+  string backgroundSmallUrl = 4;
+}
+
+message PartyBackGroundImgUpdateResp {
+  int64 id = 1;
+  string mark = 2;
+  string backgroundUrl = 3;
+  string backgroundSmallUrl = 4;
+}
+
+message ProhibitionCreateReq {
+  int64 uid = 1;
+  int64 prohibitionUid = 2;
+  int64 roomId = 3;
+  int64 roomType = 4;
+}
+
+message ProhibitionCreateResp {
+  int64 id = 1;
+  int64 status = 2;
+  int64 roomId = 3;
+  int64 roomType = 4;
+  int64 uid = 5;
+  int64 operatorUser = 6;
+}
+
+message ProhibitionRemoveReq {
+  int64 id = 1;
+  int64 roomId = 2;
+  int64 roomType = 3;
+}
+
+message ProhibitionRemoveResp {
+  int64 id = 1;
+  int64 status = 2;
+  int64 roomId = 3;
+  int64 roomType = 4;
+  int64 uid = 5;
+  int64 operatorUser = 6;
+}
+
+message ProhibitionInfo{
+  int64 id = 1;
+  int64 status = 2;
+  int64 roomId = 3;
+  int64 roomType = 4;
+  int64 uid = 5;
+  string avatar = 6;
+  string userName = 7;
+  int64 createdAt = 8;
+  int64 operatorUser = 9;
+}
+
+message ProhibitionListReq{
+  int64 lastId = 1;
+  int64 pageSize = 2;
+  int64 roomId = 3;
+  int64 roomType = 4;
+}
+
+message ProhibitionListResp{
+  int64 total = 1;
+  repeated ProhibitionInfo list = 2;
+}
+
+message PartyTerminateReq {
+  int64 room_id = 1;
+  int64 uid = 2;
+}
+
+message PartyTerminateResp {
+  int64 iret = 1;
+  string smsg = 2;
+  string name = 3;
+  int64 partyType = 4;
+  int64 createUser = 5;  
+  int64 createdAt = 6;
+  int64 terminateAt = 7;
+  int64 roomUV = 8;
+  int64 RoomNewFollowers = 9;
+}
+
+message ProhibitionGetReq{
+  int64 roomId = 1;
+  int64 roomType = 2;
+  int64 uid = 3;
+}
+
+message ProhibitionGetResp{
+  int64 id = 1;
+  int64 status = 2;
+  int64 roomId = 3;
+  int64 roomType = 4;
+  int64 uid = 5;
+}
+
+//service
+service roomRpc {
+  rpc create(PartyCreateReq) returns(PartyCreateResp);
+  rpc roomLimitGet(RoomLimitReq) returns(RoomLimitResp);
+  rpc join(PartyJoinReq) returns(PartyJoinResp);
+  rpc leave(PartyLeaveReq) returns(PartyLeaveResp);
+  rpc remove(PartyRemoveReq) returns(PartyRemoveResp);
+  rpc partyList(PartyListReq) returns(PartyListResp);
+  rpc userOnlineNumReport(UserNumReportReq) returns(UserNumReportResp);
+  rpc roominfoById(roominfoReq) returns(roominfoResq);
+  rpc updatePartyName(PartyNameUpdateReq) returns(PartyNameUpdateResp);
+  rpc updatePartyBackgroundImg(PartyBackGroundImgUpdateReq) returns(PartyBackGroundImgUpdateResp);
+  rpc prohibitionUserAdd(ProhibitionCreateReq) returns(ProhibitionCreateResp);
+  rpc prohibitionUserRemove(ProhibitionRemoveReq) returns(ProhibitionRemoveResp);
+  rpc prohibitionList(ProhibitionListReq) returns(ProhibitionListResp);
+  rpc terminate(PartyTerminateReq) returns(PartyTerminateResp);
+  rpc prohibitionUserInfo(ProhibitionGetReq) returns(ProhibitionGetResp);
+}

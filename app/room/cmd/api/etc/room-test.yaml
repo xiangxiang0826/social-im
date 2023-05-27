@@ -1,0 +1,38 @@
+Name: room
+Host: 0.0.0.0
+Port: 8889
+Mode: dev
+
+#jwtAuth
+JwtAuth:
+  AccessSecret: social-im
+  AccessExpire: 7200
+
+#监控
+Prometheus:
+  Host: 0.0.0.0
+  Port: 4008
+  Path: /metrics
+
+#链路追踪
+# Telemetry:
+#   Name: user-api
+#   Endpoint: http://127.0.0.1:14268/api/traces
+#   Sampler: 1.0
+#   Batcher: jaeger
+
+Log:
+  ServiceName: room-api
+  Level: error
+  Mode: file
+
+#rpc service
+RoomRpcConf:
+  Endpoints:
+    - 127.0.0.1:2005
+  NonBlock: true
+
+UserRpcConf:
+  Endpoints:
+    - 127.0.0.1:2004
+  NonBlock: true

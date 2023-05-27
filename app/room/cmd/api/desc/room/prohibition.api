@@ -1,0 +1,79 @@
+syntax = "v1"
+
+info(
+    title: "房间禁言模块"
+    desc: "房间禁言模块"
+    author: "邓晖"
+    email: "793967139@qq.com"
+)
+
+type (
+    ProhibitionGetReq {
+        RoomId int64 `json:"room_id"`
+        RoomType int64 `json:"room_type"`
+        Uid int64 `json:"uid"`
+    }
+
+    ProhibitionGetResp {
+        Id int64 `json:"id"`
+        RoomType int64 `json:"room_type"`
+        RoomId int64 `json:"room_id"`
+        Status int64 `json:"status"`
+        Uid int64 `json:"uid"`
+    }
+
+    ProhibitionCreateReq {
+        Uid int64 `json:"uid" validate:"required,numeric,min=1"`
+        ProhibitionUid int64 `json:"prohibition_uid" validate:"required,numeric,min=1"`
+        RoomId int64 `json:"room_id" validate:"required,numeric,min=1"`
+        RoomType int64 `json:"room_type" validate:"required,numeric,min=1"`
+    }
+
+    ProhibitionCreateResp {
+        Id int64 `json:"id"`
+        Status int64 `json:"status"`
+        RoomId int64 `json:"room_id"`
+        RoomType int64 `json:"room_type"`
+        Uid int64 `json:"uid"`
+        OperatorUser int64 `json:"operator_user"`
+    }
+
+    ProhibitionRemoveReq {
+        Id int64 `json:"id" validate:"required,numeric,min=1"`
+        RoomId int64 `json:"room_id" validate:"required,numeric,min=1"`
+        RoomType int64 `json:"room_type" validate:"required,numeric,min=1"`
+    }
+
+    ProhibitionRemoveResp {
+        Id int64 `json:"id"`
+        Status int64 `json:"status"`
+        RoomId int64 `json:"room_id"`
+        RoomType int64 `json:"room_type"`
+        Uid int64 `json:"uid"`
+        OperatorUser int64 `json:"operator_user"`
+    }
+
+    ProhibitionInfo {
+        Id int64 `json:"id"`
+        RoomType int64 `json:"room_type"`
+        RoomId int64 `json:"room_id"`
+        CreatedAt int64 `json:"created_at"`
+        Avatar string `json:"avatar"`
+        Uid int64 `json:"uid"`
+        OperatorUser int64 `json:"operator_user"`
+        UserName string `json:"user_name"`
+        Status int64 `json:"status"`
+    }
+
+    ProhibitionListReq {
+        LastId int64 `json:"last_id" validate:"omitempty,numeric"`
+        PageSize int64 `json:"page_size" validate:"required,numeric,max=100,min=1"`
+        RoomType int64 `json:"room_type" validate:"required,numeric,min=1"`
+        RoomId int64 `json:"room_id" validate:"required,numeric,min=1"`
+    }
+
+    ProhibitionListResp {
+        Total int64 `json:"total"`
+        List []*ProhibitionInfo `json:"list"`
+    }
+)

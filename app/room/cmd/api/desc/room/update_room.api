@@ -1,0 +1,36 @@
+syntax = "v1"
+
+info(
+    title: "更新派对房间"
+    desc: "更新派对房间"
+    author: "邓晖"
+    email: "793967139@qq.com"
+)
+
+type (
+    PartyNameUpdateReq {
+        Name               string `json:"name" validate:"required,max=60,min=1"`
+        Uid                int64  `json:"uid" validate:"required,numeric,min=1"`
+        Mark               string `json:"mark"`
+    }
+
+    PartyNameUpdateResp {
+        Id                 int64  `json:"id"`
+        Mark               string `json:"mark"`
+        Name               string `json:"name"`
+    }
+
+    PartyBackGroundImgUpdateReq {
+        Uid                int64  `json:"uid" validate:"required,numeric,min=1"`
+        Mark               string `json:"mark"`
+        BackgroundUrl      string `json:"background_url" validate:"omitempty,url"`
+        BackgroundSmallUrl string `json:"background_small_url" validate:"omitempty,url"`
+    }
+
+    PartyBackGroundImgUpdateResp {
+        Id                 int64  `json:"id"`
+        Mark               string `json:"mark"`
+        BackgroundUrl      string `json:"background_url"`
+        BackgroundSmallUrl string `json:"background_small_url"`
+    }
+)

@@ -1,0 +1,93 @@
+syntax = "v1"
+
+info(
+	title: "房间实例"
+	desc: "房间实例"
+	author: "邓晖"
+	email: "793967139@qq.com"
+)
+
+type (
+	PartyCreateReq {
+		Name               string `json:"name" validate:"required,max=60,min=1"`
+		Uid                int64  `json:"uid" validate:"required,numeric,min=1"`
+		BackgroundUrl      string `json:"background_url" validate:"required,url"`
+		BackgroundSmallUrl string `json:"background_small_url" validate:"required,url"`
+		PartyType          int64  `json:"party_type" validate:"required,numeric,min=1"`
+	}
+
+	PartyCreateResp {
+		Id                 int64  `json:"id"`
+		Mark               string `json:"mark"`
+		DayRemaiNum        int64  `json:"day_remai_num"`
+		BackgroundUrl      string `json:"background_url"`
+		BackgroundSmallUrl string `json:"background_small_url"`
+		Name               string `json:"name"`
+		PartyType          int64  `json:"party_type"`
+		CreatedAt          int64  `json:"created_at"`
+		RtcToken           string `json:"rtc_token"`
+	}
+
+	RoomLimitReq {
+		Uid    int64 `json:"uid" validate:"required,numeric,min=1"`
+		DayNum int64 `json:"day_num" validate:"omitempty,numeric"`
+		Type   int64 `json:"type" validate:"required,numeric,min=1"`
+	}
+
+	RoomLimitResp {
+		DayRemaiNum int64 `json:"day_remai_num"`
+	}
+)
+
+type (
+	PartyJoinReq {
+		RoomId int64 `json:"room_id" validate:"required,numeric,min=1"`
+		Uid    int64 `json:"uid" validate:"required,numeric,min=1"`
+	}
+	PartyJoinResp {
+		Iret          int64  `json:"iret"`
+		Smsg          string `json:"smsg"`
+		Name          string `json:"name"`
+		BackgroundUrl string `json:"background_url"`
+		PartyType     int64  `json:"party_type"`
+		CreateUser    int64  `json:"creator"`
+		CreateAt      int64  `json:"creat_at"`
+		RoomId        int64  `json:"room_id"`
+		Mark          string `json:"mark"`
+		RtcToken      string `json:"rtc_token"`
+	}
+
+	PartyLeaveReq {
+		RoomId int64 `json:"room_id" validate:"required,numeric,min=1"`
+		Uid    int64 `json:"uid" validate:"required,numeric,min=1"`
+	}
+	PartyLeaveResp {
+		Iret int64  `json:"iret"`
+		Smsg string `json:"smsg"`
+	}
+
+	PartyRemoveReq {
+		RoomId int64 `json:"room_id" validate:"required,numeric,min=1"`
+		Uid    int64 `json:"uid" validate:"required,numeric,min=1"`
+	}
+	PartyRemoveResp {
+		Iret int64  `json:"iret"`
+		Smsg string `json:"smsg"`
+	}
+
+	PartyTerminateReq {
+		RoomId int64 `json:"room_id" validate:"required,numeric,min=1"`
+		Uid    int64 `json:"uid" validate:"required,numeric,min=1"`
+	}
+	PartyTerminateResp {
+		Iret             int64  `json:"iret"`
+		Smsg             string `json:"smsg"`
+		Name             string `json:"name"`
+		PartyType        int64  `json:"party_type"`
+		CreateUser       int64  `json:"creator"`
+		CreateAt         int64  `json:"creat_at"`
+		TerminateAt      int64  `json:"terminate_at"`
+		RoomUV           int64  `json:"room_uv"`
+		RoomNewFollowers int64  `json:"new_followers"`
+	}
+)

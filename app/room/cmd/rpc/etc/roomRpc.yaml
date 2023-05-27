@@ -1,0 +1,83 @@
+Name: roomrpc.rpc
+ListenOn: 0.0.0.0:2005
+Mode: dev
+
+#jwtAuth
+JwtAuth:
+  AccessSecret: ae0536f9-6450-4606-8e13-5a19ed505da0
+  AccessExpire: 31536000
+
+#Monitoring
+Prometheus:
+  Host: 0.0.0.0
+  Port: 4009
+  Path: /metrics
+
+#Link Tracking
+#Telemetry:
+#  Name: room-rpc
+#  Endpoint: http://127.0.0.1:14268/api/traces
+#  Sampler: 1.0
+#  Batcher: jaeger
+
+Log:
+  ServiceName: room-rpc
+  Level: info
+  Mode: file
+
+TokenRateLimiter:
+  Seconds: 60
+  Quota: 111
+
+Mysql:
+  Path: 127.0.0.1
+  Port: "3306"
+  Dbname: room
+  Username: "root"
+  Password: "root"
+  MaxIdleConns: 20
+  MaxOpenConns: 100
+  LogMode: "dev"
+  LogZap: false
+  Config: charset=utf8mb4&parseTime=True&loc=Local&timeout=20s&readTimeout=20s&writeTimeout=20s
+
+RedisConf:
+  Host: 127.0.0.1:6379 # 单节点
+  Pass:
+  Type: node
+  DB: 0
+
+Cache:
+  - Host: 127.0.0.1:6379 # 可以多节点集群
+    Pass:
+
+# Admin rpc service
+AdminRpcConf:
+  Endpoints:
+    - 127.0.0.1:2006
+  NonBlock: true
+
+# Etcd:
+#   Hosts:
+#     - 127.0.0.1:2380
+#   Key: userrpc.rpc
+
+AliOssConf: #阿里云短信配置，在阿里云申请成功后修改以下四项，enable为true则必须修改，阿里云为默认短信验证方式
+  AccessKeyId: "LTAI5tSjv5e5JSm6sXUGv4ep"
+  AccessKeySecrect: "IhkHh1YKbyNnlp5oo2RfquoaL3Pcs3"
+  SignName: "霖灵科技"
+  VerifyTemplate: "SMS_226810164"
+  Enable: true
+
+AgoraConf: #声网配置
+  AppId: "0950f49685554dd48f2fc471716eeb61"
+  appCertificate: "d4c5cc15b62046a89dc3ec8e0ac6240b"
+  Server: "api.sd-rtn.com"
+  BackupServer: "api.agora.io"
+  PubChannel: "social-im"
+  ExpireRtm:
+
+UserRpcConf:
+  Endpoints:
+    - 127.0.0.1:2004
+  NonBlock: true

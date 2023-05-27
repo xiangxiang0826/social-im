@@ -1,0 +1,37 @@
+syntax = "v1"
+
+info(
+    title: "派对列表"
+    desc: "派对列表"
+    author: "邓晖"
+    email: "793967139@qq.com"
+)
+
+type (
+    UserInfo{
+        Avatar string `json:"avatar"`
+    }
+
+    PartyInfo {
+        Id int64 `json:"id"`
+        Name string `json:"name"` //名称
+        Mark string `json:"mark"` //房间唯一标识id
+        BackgroundSmallUrl string `json:"background_small_url"` //背景小图地址
+        PartyType int64 `json:"party_type"`
+        CreatedAt int64 `json:"created_at"`
+        OnlineNums int64 `json:"online_nums"`
+        IsHot int64 `json:"is_host"`
+        UserList []*UserInfo `json:"user_list"`
+    }
+
+    PartyListReq {
+        LastId int64 `json:"last_id" validate:"omitempty,numeric"`
+        OnlineNums int64 `json:"online_nums" validate:"omitempty,numeric,max=500,min=0"`
+        PageSize int64 `json:"page_size" validate:"required,numeric,max=100,min=1"`
+    }
+
+    PartyListResp {
+        Total int64 `json:"total"`
+        List []*PartyInfo `json:"list"`
+    }
+)

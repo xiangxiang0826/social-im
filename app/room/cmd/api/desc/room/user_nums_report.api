@@ -1,0 +1,19 @@
+syntax = "v1"
+
+info(
+    title: "用户在线数上报"
+    desc: "用户在线数上报"
+    author: "邓晖"
+    email: "793967139@qq.com"
+)
+
+type (
+    UserNumReportReq {
+        Mark string `json:"mark" validate:"required,max=9,min=9"`
+        OnlineNum int64 `json:"online_num" validate:"omitempty,numeric,max=500,min=0"`
+    }
+
+    UserNumReportResp {
+        Mark string `json:"mark"`
+    }
+)

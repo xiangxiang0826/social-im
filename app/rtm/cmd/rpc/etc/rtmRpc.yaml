@@ -1,0 +1,15 @@
+Name: roomrpc.rpc
+ListenOn: 0.0.0.0:2003
+Mode: dev
+
+Log:
+  ServiceName: user-rpc
+  Level: error
+
+AgoraConf: #声网配置
+  AppId: "0950f49685554dd48f2fc471716eeb61"
+  appCertificate: "d4c5cc15b62046a89dc3ec8e0ac6240b"
+  Server: "api.sd-rtn.com"
+  BackupServer: "api.agora.io"
+  PubChannel: "social-im"
+  ExpireRtm:

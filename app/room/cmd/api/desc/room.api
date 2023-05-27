@@ -1,0 +1,69 @@
+syntax = "v1"
+
+info(
+	title: "房间服务"
+	desc: "房间服务"
+	author: "Dengh"
+	email: "793967139@qq.com"
+	version: "v1"
+)
+
+import (
+	"room/room.api"
+	"room/party_list.api"
+	"room/user_nums_report.api"
+	"room/update_room.api"
+	"room/prohibition.api"
+)
+
+//============================> room v1 <============================
+
+//need login
+@server(
+	prefix: room/v1
+	group: room
+	jwt: JwtAuth
+)
+service room {
+	@doc "party create"
+	@handler create
+	post /party/create (PartyCreateReq) returns (PartyCreateResp)
+	@doc "room limit get"
+	@handler roomLimitGet
+	post /roomLimit/get (RoomLimitReq) returns (RoomLimitResp)
+	@doc "party join"
+	@handler join
+	post /party/join (PartyJoinReq) returns (PartyJoinResp)
+	@doc "party leave"
+	@handler leave
+	post /party/leave (PartyLeaveReq) returns (PartyLeaveResp)
+	@doc "party remove"
+	@handler remove
+	post /party/remove (PartyRemoveReq) returns (PartyRemoveResp)
+	@handler terminate
+	post /party/terminate (PartyTerminateReq) returns (PartyTerminateResp)
+	@doc "party list"
+	@handler partyList
+	post /party/list (PartyListReq) returns (PartyListResp)
+	@doc "online user nums report"
+	@handler userNumReport
+	post /party/userNumReport (UserNumReportReq) returns (UserNumReportResp)
+	@doc "party name update"
+	@handler updatePartyName
+	post /party/updateName (PartyNameUpdateReq) returns (PartyNameUpdateResp)
+	@doc "party background img update"
+	@handler updatePartyBackgroundImg
+	post /party/updateBackgroundImg (PartyBackGroundImgUpdateReq) returns (PartyBackGroundImgUpdateResp)
+	@doc "prohibition user add"
+	@handler prohibitionUserAdd
+	post /prohibition/userAdd (ProhibitionCreateReq) returns (ProhibitionCreateResp)
+	@doc "prohibition user remove"
+	@handler prohibitionUserRemove
+	post /prohibition/userRemove (ProhibitionRemoveReq) returns (ProhibitionRemoveResp)
+	@doc "prohibition list"
+	@handler prohibitionList
+	post /prohibition/list (ProhibitionListReq) returns (ProhibitionListResp)
+	@doc "prohibition room user info"
+	@handler prohibitionUserInfo
+	post /prohibition/userInfo (ProhibitionGetReq) returns (ProhibitionGetResp)
+}
